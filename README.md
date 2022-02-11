@@ -10,6 +10,11 @@ npm install
 npm run serve
 ```
 
+### Starts a Json server for mock database
+```
+json-server db.json
+```
+
 ### Compiles and minifies for production
 ```
 npm run build
