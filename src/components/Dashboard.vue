@@ -9,28 +9,11 @@
     <h3 >List of Movies</h3>
     <hr>
 
-    <EditMovie :data="data" v-if="edit" @close-edit="closeEdit()"></EditMovie>
+    <EditMovie :data="data" v-if="edit" @close-edit="closeEdit()" @save-edit="saveEdit"></EditMovie>
     
-    <AddMovie :id="addId" v-if="add" @close-add="closeAdd()" ></AddMovie>
+    <AddMovie :id="addId" v-if="add" @close-add="closeAdd()" @save-new-movie="saveNew"></AddMovie>
 
-    
- 
-  <div v-for="movie in Movies" :key="movie.id" class="movie-box" >
-    <div class="movie-title-box" @click.prevent="editMovie(movie.id)">
-      <h2 class="movie-title"> {{ movie.name }}  </h2>
-      <p class="movie-tags"><span v-for="movie in movie.categories" :key="movie.id" class="movie-tag">
-        {{ movie }}
-      </span></p>
-    </div>
-
-    <p class="movie-director"><strong>{{movie.director}}</strong>, <span> <i>{{movie.year}}</i></span></p>
-    <a href="#" :title="movie.actors" >Actors</a> | <a href="#" :title="movie.writer"> Writers</a> | <span>{{movie.runtime}}min.</span> <small>{{movie.id}}</small>
-    
-    <hr>
-    <p class="movie-description">{{movie.storyline}}</p>
-    
-  </div>
-
+    <ListOfMovies :Movies="Movies" @edit-movie="editMovie"></ListOfMovies>
 
   </div>
 </template>
@@ -39,6 +22,7 @@
 import axios from 'axios'
 import EditMovie from '@/components/EditMovie.vue';
 import AddMovie from '@/components/AddMovie.vue';
+import ListOfMovies from '@/components/ListOfMovies.vue';
 
 export default {
   name: 'Dashboard',
@@ -46,7 +30,7 @@ export default {
     msg: String
   },
   components: {
-    EditMovie, AddMovie
+    EditMovie, AddMovie, ListOfMovies
   },
   data() {
     return {
@@ -72,6 +56,7 @@ export default {
 
   methods: {
 
+
     /*
     * function for editing movie on which user clicked
     *
@@ -79,7 +64,7 @@ export default {
     * */
     editMovie(id) {
 
-      this.Movies.forEach( movie => {
+      this.Movies.find( movie => {
         if (movie.id === id) {
           this.data.movieId = movie.id,
           this.data.movieName = movie.name
@@ -96,17 +81,37 @@ export default {
       this.edit = true
     },
 
+    saveEdit(values) {
+
+      this.Movies.find(movie => {
+        if (movie.id === values.id) {
+          movie.name = values.name
+          movie.year = values.year
+          movie.director = values.director
+          movie.runtime = values.runtime
+          movie.storyline = values.storyline
+        }
+      })
+
+      this.edit = false
+      this.clearInputs()
+    },
+
+    saveNew(values) {
+      console.log(" values: " + JSON.stringify(values));
+      this.Movies.push(values)
+      this.callMoviesDb()
+    },
+
     //General functions...
 
     closeEdit() {
-      this.callMoviesDb()
       this.edit = false
       this.clearInputs()
 
     },
 
     closeAdd() {
-      this.callMoviesDb()
       this.add = false
       this.clearInputs()
 
@@ -130,9 +135,9 @@ export default {
       this.movieDescription= ""
     },
 
-     async callMoviesDb() {
-      await axios.get('http://localhost:3000/Movies').then((response) => this.Movies = response.data )
-      window.location.reload()
+      callMoviesDb() {
+       axios.get('http://localhost:3000/Movies').then((response) => this.Movies = response.data )
+      
     }
 
   }
@@ -155,55 +160,6 @@ li {
 a {
   color: #42b983;
   text-decoration: none;
-}
-
-.movie-box {
-  position: relative;
-  width: 15em;
-  height: 24em;
-  display: inline-block;
-  margin: 1em;
-  border: 2px solid grey;
-  border-radius: .5em;
-
-}
-
-.movie-title-box {
-  position: relative;
-  background: grey;
-  color: aliceblue;
-  height: 9em;
-  cursor: pointer;
-}
-
-.movie-title {
-  position: relative;
-  top: 2em;
-  
-  margin: 0;
-  max-height: 6em;
-  overflow: hidden;
-}
-
-.movie-tags {
-  position: absolute;
-  top: -0.5em;
-  
-}
-
-.movie-tag {
-  padding: .25em;
-  background: #42b983;
-  border-radius: .25em;
-  color:aliceblue;
-  margin: 0 .15em;
-}
-
-.movie-description {
-  overflow: hidden;
-  height: 8em;
-  text-align: left;
-  padding: 0 .25em;
 }
 
 

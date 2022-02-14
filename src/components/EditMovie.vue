@@ -64,13 +64,14 @@ import axios from 'axios'
             }
         },
         methods: {
+
             /*
             * Function for editing movie via axios put method according movie id.
             */
             saveChanges() {
-                axios.put(`http://localhost:3000/Movies/${this.movieId}`,
-                {   
-                     "id": this.movieId,
+
+                const values = {
+                    "id": this.movieId,
                      "name": this.movieName,
                      "year": this.movieYear,
                      "runtime": this.movieRuntime,
@@ -80,16 +81,18 @@ import axios from 'axios'
                      "writer": this.movieWriters,
                      "actors": this.movieActors,
                      "storyline": this.movieDescription
-                    }
+                }
+
+                axios.put(`http://localhost:3000/Movies/${this.movieId}`, values
 
                 )
 
-                this.closeEdit()
+                this.$emit("save-edit", values)
 
             },
 
             closeEdit() {
-                this.$emit("close-edit")
+                this.$emit("close-edit", )
             }
         },
        

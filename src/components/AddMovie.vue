@@ -60,8 +60,8 @@ import axios from 'axios'
             * This function create anew movie and add it into database via axios post request. 
             */
             saveNewMovie() {
-            axios.post('http://localhost:3000/Movies', 
-                 {   "id": this.movieId,
+            const values = {
+              "id": this.movieId,
                      "name": this.movieName,
                      "year": this.movieYear,
                      "runtime": this.movieRuntime,
@@ -71,17 +71,23 @@ import axios from 'axios'
                      "writer": this.movieWriters,
                      "actors": this.movieActors,
                      "storyline": this.movieDescription
-                    }
+            }
+            axios.post('http://localhost:3000/Movies', 
+                 values
             )
+
+            this.$emit("save-new-movie", values)
 
             // clear the inputs
             this.clearInputs() 
             this.closeAdd()
 
     },
+
     closeAdd() {
         this.$emit("close-add")
     },
+    
     clearInputs() {
                 this.movieId = "",
                 this.movieName = "",

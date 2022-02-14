@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Alien",
-      "year": "1978",
+      "year": "1989",
       "runtime": 116,
       "categories": [
         "horror",
@@ -56,7 +56,7 @@
     {
       "id": 3,
       "name": "Mad Max",
-      "year": 1979,
+      "year": "1988",
       "runtime": 93,
       "categories": [
         "action",
@@ -80,7 +80,7 @@
     },
     {
       "id": 4,
-      "name": "Star Wars: Episode V - The Empire Strikes Back",
+      "name": "Star Wars: Episode V ",
       "year": 1980,
       "runtime": 124,
       "categories": [
@@ -96,18 +96,19 @@
         "Harrison Ford",
         "Carrie Fisher",
         "Alec Guinness"
-      ]
+      ],
+      "storyline": "bla bla bla"
     },
     {
       "id": 5,
-      "name": "Indiana Jones: Raiders of the Lost Ark",
+      "name": "Indiana Jones: ",
       "year": 1981,
       "runtime": 115,
       "categories": [
         "action",
         "adventure"
       ],
-      "release-date": "1981-06-12",
+      "release-date": "1979-05-25",
       "director": "Steven Spielberg",
       "writer": [
         "Lawrence Kasdan",
@@ -142,7 +143,7 @@
     },
     {
       "id": 7,
-      "name": "Superman II",
+      "name": "Superman III - The bullshit",
       "year": 1981,
       "runtime": 127,
       "categories": [
@@ -150,7 +151,7 @@
         "adventure",
         "sci-fi"
       ],
-      "release-date": "1981-06-19",
+      "release-date": "1979-05-25",
       "director": " Richard Lester",
       "writer": [
         "Joe Shuster",
@@ -238,15 +239,15 @@
     },
     {
       "id": 11,
-      "name": "New Movie",
-      "year": "2002",
-      "runtime": "25",
+      "name": "Pulp Fiction",
+      "year": "1995",
+      "runtime": "50",
       "categories": null,
       "release-date": "1979-05-25",
-      "director": "test",
+      "director": "Quentin Tarr",
       "writer": null,
       "actors": null,
-      "storyline": "this is test"
+      "storyline": "the new film."
     }
   ]
 }
