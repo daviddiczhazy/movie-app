@@ -5,7 +5,7 @@
 npm install
 ```
 
-### Instal jsno server for mock database
+### Instal json server for mock database
 ```
 npm install json-server -g
 ```
